@@ -1,0 +1,7 @@
+.next
+node_modules
+coverage
+codebase.txt
+tmp_header_snippet.txt
+public/landing-original.html
+*.tsbuildinfo

@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-espresso: #2c1a0e;
+  --color-gold: #c8a96e;
+  --color-gold-light: #e8d4a8;
+  --color-cream: #faf6ee;
+  --color-parchment: #f0e6d3;
+  --color-bark: #6b3f1e;
+  --color-latte: #b8865a;
+  --color-foreground: #1a0f07;
+  --color-muted: #8c6a4e;
+  --color-surface: #fdf9f3;
+}
+
+@layer components {
+  .dot-grid {
+    background-image: radial-gradient(rgba(44, 26, 14, 0.085) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: 'Fraunces', serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-parchment);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
+
+/* Sketch/illustration border style */
+.sketch-border {
+  border: 2px solid var(--color-espresso);
+  border-radius: 2px;
+  position: relative;
+}
+.sketch-border::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px dashed var(--color-gold);
+  border-radius: 1px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Hand-drawn underline */
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+.hand-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  transform: rotate(-0.5deg) scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hand-underline:hover::after,
+.hand-underline.active::after {
+  transform: rotate(-0.5deg) scaleX(1);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.hidden-init {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Stagger children */
+.stagger-children > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.stagger-children > *:nth-child(2) {
+  transition-delay: 100ms;
+}
+.stagger-children > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+.stagger-children > *:nth-child(4) {
+  transition-delay: 300ms;
+}
+.stagger-children > *:nth-child(5) {
+  transition-delay: 400ms;
+}
+.stagger-children > *:nth-child(6) {
+  transition-delay: 500ms;
+}
+
+/* Doodle texture overlay */
+.doodle-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232C1A0E' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Gold shimmer on hover */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold) 0%,
+    #f0d898 40%,
+    var(--color-gold) 60%,
+    #c8a96e 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Menu card hover */
+.menu-card {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+.menu-card:hover {
+  transform: translateY(-4px) rotate(0.3deg);
+  box-shadow: 0 20px 40px rgba(44, 26, 14, 0.15);
+}
+
+/* Nav blur */
+.nav-blur {
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* Korean badge */
+.kr-badge {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .float-anim,
+  .menu-card {
+    animation: none;
+    transition: none;
+  }
+}
